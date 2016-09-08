@@ -32,5 +32,6 @@ Start  Kafka server:
     
     $ ./activator run
     
-  ####Start Consumer & producer:
+####Start Consumer & producer:
+  
     $ curl http://localhost:9000/start
