@@ -4,6 +4,7 @@ import java.util.{Properties, UUID}
 
 import kafka.message.DefaultCompressionCodec
 import kafka.producer.{KeyedMessage, Producer, ProducerConfig}
+import play.api.Logger
 
 
 class KafkaProducer(brokerList: String) {
@@ -25,7 +26,7 @@ class KafkaProducer(brokerList: String) {
 
   def send(topic: String, messages: Seq[String]): Unit =
     try {
-      println("sending batch messages  to kafka queue.......")
+      Logger.info("sending batch messages  to kafka queue.......")
       val queueMessages = messages.map { message => new KeyedMessage[String, String](topic, message) }
       producer.send(queueMessages: _*)
     } catch {

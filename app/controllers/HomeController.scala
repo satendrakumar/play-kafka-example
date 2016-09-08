@@ -6,7 +6,7 @@ import javax.inject.Inject
 import akka.actor.{ActorSystem, Props}
 import play.api.Logger
 import play.api.mvc._
-import services.kafka.consumer.KafkaConsumer
+import services.kafka.consumer.{ConsumerActor, KafkaConsumer}
 import services.kafka.producer.{KafkaProducer, ProducerActor, Start}
 
 
@@ -30,8 +30,10 @@ class HomeController @Inject()(system: ActorSystem) extends Controller {
     Logger.info("Staring..........................")
     val producerActor = system.actorOf(Props(classOf[ProducerActor], producer))
     producerActor ! Start
-   // val cosumerActor = system.actorOf(Props(classOf[ProducerActor], producer))
-    //cosumerActor ! Start
+
+
+    val cosumerActor = system.actorOf(Props(classOf[ConsumerActor], consumer))
+    cosumerActor ! Start
 
     Ok("Producer & consumer have started")
   }

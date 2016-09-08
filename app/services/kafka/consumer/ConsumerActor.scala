@@ -8,7 +8,8 @@ import services.kafka.producer.Start
 class ConsumerActor(consumer: KafkaConsumer) extends Actor {
   def receive: Receive = {
     case Start =>
-      startConsumer()
+      Logger.info("Read  message from kafka")
+        startConsumer()
   }
 
   def startConsumer() = {

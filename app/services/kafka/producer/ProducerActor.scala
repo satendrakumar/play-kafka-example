@@ -16,8 +16,8 @@ class ProducerActor(producer: KafkaProducer) extends Actor {
 
   def startProducer() = {
     Logger.info("Sending........................")
-    val batchSize = 50
-    (1 to 1000000000).map(no => "Message " + no).grouped(batchSize).foreach { message =>
+    val batchSize = 10
+    (1 to 10000).map(no => "Message " + no).grouped(batchSize).foreach { message =>
 
       Logger.info("Sending message batch size " + message.length)
 

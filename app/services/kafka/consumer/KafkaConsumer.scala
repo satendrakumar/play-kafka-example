@@ -1,8 +1,10 @@
 package services.kafka.consumer
 
 import java.util.Properties
+
 import kafka.consumer.{Consumer, ConsumerConfig, ConsumerTimeoutException, Whitelist}
 import kafka.serializer.DefaultDecoder
+import play.api.Logger
 
 
 class KafkaConsumer(topic: String, groupId: String, zookeeperConnect: String) {
@@ -28,7 +30,7 @@ class KafkaConsumer(topic: String, groupId: String, zookeeperConnect: String) {
   def read(): Option[String] =
     try {
       if (hasNext) {
-        println("Getting message from queue.............")
+        Logger.info("Getting message from queue.............")
         val message = iterator.next().message()
         Some(new String(message))
       } else {
@@ -47,8 +49,7 @@ class KafkaConsumer(topic: String, groupId: String, zookeeperConnect: String) {
       case timeOutEx: ConsumerTimeoutException =>
         false
       case ex: Exception =>
-        ex.printStackTrace()
-        println("Getting error when reading message ")
+        Logger.error("Getting error when reading message ",ex)
         false
     }
 
