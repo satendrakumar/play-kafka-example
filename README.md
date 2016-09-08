@@ -1,4 +1,4 @@
-# activator-kafka-scala-producer-consumer
+# play-kafka-example
 
 #### Steps to Install and Run zookeeper and kafka on your system : 
 
